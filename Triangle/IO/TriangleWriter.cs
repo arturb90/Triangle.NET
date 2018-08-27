@@ -38,10 +38,17 @@ namespace TriangleNet.IO
         /// <param name="filename"></param>
         public void WriteNodes(Mesh mesh, string filename)
         {
+#if NETFX_CORE
+            using (var writer = new WinRTLegacy.IO.StreamWriter(filename))
+            {
+                WriteNodes(writer, mesh);
+            }
+#else
             using (var writer = new StreamWriter(filename))
             {
                 WriteNodes(writer, mesh);
             }
+#endif
         }
 
         /// <summary>
@@ -150,7 +157,13 @@ namespace TriangleNet.IO
 
             tri.orient = 0;
 
-            using (var writer = new StreamWriter(filename))
+            using (
+#if NETFX_CORE
+                var writer = new WinRTLegacy.IO.StreamWriter(filename)
+#else
+                var writer = new StreamWriter(filename)
+#endif          
+                )
             {
                 // Number of triangles, vertices per triangle, attributes per triangle.
                 writer.WriteLine("{0} 3 {1}", mesh.triangles.Count, regions ? 1 : 0);
@@ -192,7 +205,13 @@ namespace TriangleNet.IO
         {
             bool hasMarkers = polygon.HasSegmentMarkers;
 
-            using (var writer = new StreamWriter(filename))
+            using (
+#if NETFX_CORE
+                var writer = new WinRTLegacy.IO.StreamWriter(filename)
+#else
+                var writer = new StreamWriter(filename)
+#endif          
+                )
             {
                 // TODO: write vertex attributes
 
@@ -275,7 +294,13 @@ namespace TriangleNet.IO
 
             bool useBoundaryMarkers = mesh.behavior.UseBoundaryMarkers;
 
-            using (var writer = new StreamWriter(filename))
+            using (
+#if NETFX_CORE
+                var writer = new WinRTLegacy.IO.StreamWriter(filename)
+#else
+                var writer = new StreamWriter(filename)
+#endif          
+                )
             {
                 if (writeNodes)
                 {
@@ -355,7 +380,13 @@ namespace TriangleNet.IO
 
             Behavior behavior = mesh.behavior;
 
-            using (var writer = new StreamWriter(filename))
+            using (
+#if NETFX_CORE
+                var writer = new WinRTLegacy.IO.StreamWriter(filename)
+#else
+                var writer = new StreamWriter(filename)
+#endif          
+                )
             {
                 // Number of edges, number of boundary markers (zero or one).
                 writer.WriteLine("{0} {1}", mesh.NumberOfEdges, behavior.UseBoundaryMarkers ? "1" : "0");
@@ -429,7 +460,13 @@ namespace TriangleNet.IO
             int n1, n2, n3;
             int i = 0;
 
-            using (StreamWriter writer = new StreamWriter(filename))
+            using (
+#if NETFX_CORE
+                var writer = new WinRTLegacy.IO.StreamWriter(filename)
+#else
+                var writer = new StreamWriter(filename)
+#endif          
+                )
             {
                 // Number of triangles, three neighbors per triangle.
                 writer.WriteLine("{0} 3", mesh.triangles.Count);

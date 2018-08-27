@@ -81,7 +81,11 @@ namespace TriangleNet.IO
             }
 
             this.tmpFile = Path.GetTempFileName();
+#if NETFX_CORE
+            this.stream = new WinRTLegacy.IO.StreamWriter(tmpFile);
+#else
             this.stream = new StreamWriter(tmpFile);
+#endif
         }
 
         /// <summary>

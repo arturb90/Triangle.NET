@@ -35,7 +35,7 @@ namespace TriangleNet.IO
 
             string line = reader.ReadLine().Trim();
 
-            while (String.IsNullOrWhiteSpace(line) || line.StartsWith("#"))
+			while (line == null || line.Trim().Equals("") || line.StartsWith("#"))
             {
                 if (reader.EndOfStream)
                 {
@@ -171,7 +171,13 @@ namespace TriangleNet.IO
             string[] line;
             int invertices = 0, attributes = 0, nodemarkers = 0;
 
-            using (var reader = new StreamReader(nodefilename))
+            using (
+#if NETFX_CORE
+                var reader = new WinRTLegacy.IO.StreamReader(nodefilename)
+#else
+                var reader = new StreamReader(nodefilename)
+#endif
+                )
             {
                 if (!TryReadLine(reader, out line))
                 {
@@ -282,7 +288,13 @@ namespace TriangleNet.IO
             string[] line;
             int invertices = 0, attributes = 0, nodemarkers = 0;
 
-            using (var reader = new StreamReader(polyfilename))
+            using (
+#if NETFX_CORE
+                var reader = new WinRTLegacy.IO.StreamReader(polyfilename)
+#else
+                var reader = new StreamReader(polyfilename)
+#endif
+                )
             {
                 if (!TryReadLine(reader, out line))
                 {
@@ -528,7 +540,13 @@ namespace TriangleNet.IO
 
             List<ITriangle> triangles;
 
-            using (var reader = new StreamReader(elefilename))
+            using (
+#if NETFX_CORE
+                var reader = new WinRTLegacy.IO.StreamReader(elefilename)
+#else
+                var reader = new StreamReader(elefilename)
+#endif
+                )
             {
                 // Read number of elements and number of attributes.
                 string[] line;
@@ -612,7 +630,13 @@ namespace TriangleNet.IO
         {
             double[] data = null;
 
-            using (var reader = new StreamReader(areafilename))
+            using (
+#if NETFX_CORE
+                var reader = new WinRTLegacy.IO.StreamReader(areafilename)
+#else
+                var reader = new StreamReader(areafilename)
+#endif
+                )
             {
                 string[] line;
 
@@ -665,7 +689,13 @@ namespace TriangleNet.IO
 
             string[] line;
 
-            using (var reader = new StreamReader(edgeFile))
+            using (
+#if NETFX_CORE
+                var reader = new WinRTLegacy.IO.StreamReader(edgeFile)
+#else
+                var reader = new StreamReader(edgeFile)
+#endif
+                )
             {
                 // Read the edges from a .edge file.
 
