@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+#define USE_Z
+
 namespace TriangleNet.Geometry
 {
     using System;
