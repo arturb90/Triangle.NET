@@ -43,6 +43,11 @@ namespace TriangleNet.Topology.DCEL
             set { id = value; }
         }
 
+        public Point Generator
+        {
+            get { return generator; }
+        }
+
         /// <summary>
         /// Gets or sets a half-edge connected to the face.
         /// </summary>
