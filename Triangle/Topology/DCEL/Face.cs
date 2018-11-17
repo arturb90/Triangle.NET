@@ -43,6 +43,12 @@ namespace TriangleNet.Topology.DCEL
             set { id = value; }
         }
 
+        public int Mark
+        {
+            get { return mark; }
+            set { mark = value; }
+        }
+
         public Point Generator
         {
             get { return generator; }
